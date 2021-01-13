@@ -47,8 +47,6 @@ function genreContent (selector, text) {
     selector.textContent = text;
 }
 
-genreContent(genre, 'драма');
-
 // 3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
 // Реализовать только при помощи JS
 
@@ -57,16 +55,86 @@ promo.style.background = 'url(../img/bg.jpg)';
 // 4) Список фильмов на странице сформировать на основании данных из этого JS файла.
 // Отсортировать их по алфавиту 
 
-movieDB.movies.sort();
+const filmsSort = (films) => {
+    films.forEach((item, i) => {
+        films[i] = item.toUpperCase();
+    });
+
+    films.sort();
+};
 
 // 5) Добавить нумерацию выведенных фильмов
 
-list.innerHTML = '';
+const createTable = (films) => {
 
-movieDB.movies.forEach((item, i) => {
-    list.innerHTML += `<li class="promo__interactive-item">${i+1} ${item}
-                        <div class="delete"></div></li>`;
+    list.innerHTML = '';
+
+    films.forEach((item, i) => {
+        list.innerHTML += `<li class="promo__interactive-item">${i+1} ${item}
+                            <div class="delete"></div></li>`;
+    });
+};
+
+// 3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+function deleteItem() {
+    listItem.forEach((item, i) => {
+        item.lastChild.addEventListener('click', () => {
+            movieDB.movies.splice(i, 1);
+            createTable(movieDB.movies);
+            deleteItem();
+        });
+    });
+} 
+
+
+
+genreContent(genre, 'драма');
+filmsSort(movieDB.movies);
+createTable(movieDB.movies);
+deleteItem();
+
+// 1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+// новый фильм добавляется в список. Страница не должна перезагружаться.
+// Новый фильм должен добавляться в movieDB.movies.
+// Для получения доступа к значению input - обращаемся к нему как input.value;
+// P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+
+// Добавляем атрибут для формы что бы не было перезагрузки страницы при нажатии кнопки отправить
+
+form.setAttribute('onsubmit', 'return false');
+
+btn.addEventListener('click', () => {
+
+    // 4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+    // "Добавляем любимый фильм"
+
+    if (check.checked) {
+        console.log('Добавляем любимый фильм');
+    }
+
+    let filmValue = document.querySelector('.adding__input').value;
+
+    // 2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+    if (filmValue.length > 21) {
+        movieDB.movies.push(`${filmValue.slice(0, 21)}...`);
+    } else if (filmValue.length > 0) {
+        movieDB.movies.push(filmValue);
+    } 
+
+    // 5) Фильмы должны быть отсортированы по алфавиту
+
+    filmsSort(movieDB.movies);
+    createTable(movieDB.movies);
+    deleteItem();
 });
+
+
+
+
+
+// ================================================================================
 
 // Выводим в консоль все узлы body
 
@@ -81,62 +149,3 @@ for (let node of document.body.childNodes) {
         continue;
     }
 }
-
-// 1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
-// новый фильм добавляется в список. Страница не должна перезагружаться.
-// Новый фильм должен добавляться в movieDB.movies.
-// Для получения доступа к значению input - обращаемся к нему как input.value;
-// P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
-
-
-
-form.setAttribute('onsubmit', 'return false');
-
-btn.addEventListener('click', () => {
-
-    // 4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
-    // "Добавляем любимый фильм"
-
-    if (check.checked) {
-        console.log('Добавляем любимый фильм');
-    }
-
-    list.innerHTML = '';
-    movieDB.movies.push(document.querySelector('.adding__input').value);
-
-    // 2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
-
-    if (movieDB.movies[(movieDB.movies.length - 1)].length > 21) {
-        let longName = movieDB.movies[(movieDB.movies.length - 1)].slice(0, 21);
-        movieDB.movies.pop();
-        movieDB.movies.push(longName + '...');
-    }
-
-    // 5) Фильмы должны быть отсортированы по алфавиту
-
-    movieDB.movies.forEach((item, i) => {
-        movieDB.movies[i] = item.toUpperCase();
-    });
-
-    movieDB.movies.sort();
-    movieDB.movies.forEach((item, i) => {
-        list.innerHTML += `<li class="promo__interactive-item">${i+1} ${item}
-                            <div class="delete"></div></li>`;
-    });
-
-    deleteItem();
-
-    return false;
-});
-
-// 3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
-
-function deleteItem() {
-    listItem.forEach(item => {
-        item.lastChild.addEventListener('click', () => {
-            item.remove();
-        });
-    });
-} 
-
-deleteItem();

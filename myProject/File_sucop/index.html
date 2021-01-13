@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <h1 class="heading">Данные из SibReceiver</h1>
+        <div class="table">
+            <table class="iksweb">
+                <tbody>
+                    <tr class="table__heading">
+                        <td>Gx</td>
+                        <td>Gy</td>
+                        <td>Gz</td>
+                        <td>Bx</td>
+                        <td>By</td>
+                        <td>Bz</td>
+                    </tr>
+                    <tr class="SibReceiver">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h1 class="heading">Данные для Sucop</h1>
+        <div class="table">
+            <table class="iksweb">
+                <tbody>
+                    <tr class="table__heading">
+                        <td>Gx</td>
+                        <td>Gy</td>
+                        <td>Gz</td>
+                        <td>Bx</td>
+                        <td>By</td>
+                        <td>Bz</td>
+                    </tr>
+                    <tr class="Sucop">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dateTime">
+            <span class="date"></span>
+            <span class="time"></span>
+        </div>
+
+        <div class="browse-button browse-button__index--mb">
+            <input type="file" class="browse-button__link" id="input_file" onchange="readFile(this)">
+            <label for="input_file" class="browse-button__text">Выберите файл</label>
+        </div>
+
+    </div>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

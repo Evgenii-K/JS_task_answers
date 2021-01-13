@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import 'null';
+
+.wrapper {
+    padding: 0 calc(50% - 570px) 0 calc(50% - 570px);
+}
+
+/*browse-button
+  =======================*/
+
+.browse-button {
+
+    display: flex;
+    justify-content: center;
+
+
+    &__link {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+    }
+
+    &__index--mb {
+        margin: 32px 0;
+    }
+
+    &__text {
+        cursor: pointer;
+        text-align: center;
+        font-size: 16px;
+        line-height: 48px;
+        color: #FF6A6A;
+        transition: 0.15s linear;
+        width: 211px;
+        height: 48px;
+        border: 1px solid #FF6A6A;
+
+        &:hover {
+            background: #FF6A6A;
+            color: #fff;
+        }
+    }
+}
+
+.heading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 32px 0;
+    font-weight: 600;
+    line-height: 17px;
+    color: #000;
+}
+
+.table {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    &__heading {
+        font-size: 16px;
+        font-weight: 600;
+
+    }
+}
+
+.iksweb {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    height: auto;
+    border: 1px solid #595959;
+
+}
+
+.iksweb td,
+th {
+    border: 1px solid #595959;
+    padding: 3px;
+    width: 30px;
+    height: 35px;
+    line-height: 17px;
+    color: #5D5D5D;
+}
+
+.iksweb th {
+    background: #347c99;
+    color: #fff;
+}
+
+.SibReceiver {
+    font-weight: 400;
+}
+
+.dateTime {
+    line-height: 17px;
+    color: #5D5D5D;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 16px;
+
+}
+
+.dateTime span {
+    margin-left: 28px;
+}
